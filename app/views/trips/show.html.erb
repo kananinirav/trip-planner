@@ -1,0 +1,83 @@
+<h1> Trip Information </h1>
+
+<h4> <%= @trip.title %></h4> <hr>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <b> Trips Note: </b>
+    <%= @trip.note %>
+  </div>
+  <div class="col-md-3">
+    <b> Start Date: </b>
+    <%= @trip.start_date %>
+  </div>
+  <div class="col-md-3">
+    <b> End Date: </b>
+    <%= @trip.end_date %>
+  </div>
+</div>
+
+<h5> Places </h5> <hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Place name</th>
+      <th scope="col">Start date</th>
+      <th scope="col">End date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trip&.routes&.each_with_index do |route, index| %>
+      <tr>
+        <td> <%= index + 1 %>
+        <td> <%= route.place_name %></td>
+        <td> <%= route.start_date %> </td>
+        <td> <%= route.end_date %> </td>
+      </tr>  
+    <% end %>
+    <% if @trip&.routes.blank? %>
+      <p class="text-danger">There Is No Data !!!</p>
+    <% end %>
+  <tbody>
+</table>
+
+<h5> Expenses </h5> <hr>
+
+<table class="table table-hover mt-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Expense Date</th>
+      <th scope="col">Description</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trip&.expense_trackers&.each_with_index do |route, index| %>
+      <tr>
+        <td> <%= index + 1 %>
+        <td> <%= route.date %></td>
+        <td> <%= route.description %> </td>
+        <td> <%= number_to_currency(route.amount&.to_i) %> </td>
+      </tr>  
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td> Total: <%= number_to_currency(@trip.expense_trackers&.sum(&:amount)&.to_i) %>
+    </tr>
+    <% if @trip&.expense_trackers.blank? %>
+      <p class="text-danger">There Is No Data !!!</p>
+    <% end %>
+  <tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this trip", edit_trip_path(@trip), class: "btn btn-primary mb-3" %>
+  <%= link_to "Back to trips", trips_path, class: "btn btn-secondary mb-3" %>
+
+  <%= button_to "Destroy this trip", @trip, method: :delete, class: "btn btn-danger mb-3", form: { data: { turbo_confirm: "Are you sure?" } } %>
+</div>

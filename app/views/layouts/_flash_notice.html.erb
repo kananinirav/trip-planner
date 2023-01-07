@@ -1,0 +1,24 @@
+<% if !flash[:notice].blank? %>
+  <div id='flash'>
+    <% if !flash[:notice].blank? %>
+			<div class="alert alert-success in auto_close">
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <%= notice %>
+			</div>
+		<% end %>
+  </div>
+<% end %>
+<% if !flash[:alert].blank? %>
+  <div class="alert alert-warning in auto_close">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<% if flash[:notice].blank? and flash[:alert].blank? %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> auto_close">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <%= value %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,51 @@
+<%= form_for(trip) do |form| %>
+
+  <div class="row  mb-5">
+    <div class="col-md-3">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+      <%= form.label :start_date %>
+        <%= form.date_field :start_date, class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+      <%= form.label :end_date%>
+        <%= form.date_field :end_date, class: "form-control" %>
+    </div>
+    <div class="col-md-5 mb-3">
+      <%= form.label :note %>
+      <%= form.text_area :note, class: "form-control" %>
+    </div>
+
+    <!-- Rendering the partial route_fields -->
+    <div id="routes">
+      <h5> Places </h5> <hr>
+      <%= form.fields_for :routes do |route| %>
+        <%= render "route_fields", :f => route %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "Add Route", form, :routes, :class => "btn btn-primary mt-3 mb-3" %>
+      </div>
+    </div>
+
+    <!-- Rendering the partial expense_tracker_fields -->
+    <div id="expenses mt-3">
+      <h5> Expenses </h5> <hr>
+      <%= form.fields_for :expense_trackers do |route| %>
+        <%= render "expense_tracker_fields", :f => route %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "Add Expense", form, :expense_trackers, :class => "btn btn-primary mt-3 mb-3" %>
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <%= form.submit nil , class: "btn btn-success" %>
+      <% unless @trip.new_record? %>
+        <%= link_to "Show this trip", @trip, class: "btn btn-info" %>
+      <% end %>
+      <%= link_to "Back to trips", trips_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

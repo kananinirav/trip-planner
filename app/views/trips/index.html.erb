@@ -1,0 +1,30 @@
+<h1>Trips</h1>
+
+<div id="trips">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col" style="width: 30%;">Note</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @trips.order(:id).each_with_index do |trip, index| %>
+      <tr id="<%= dom_id trip %>">
+        <th scope="row"><%= index + 1%></th>
+        <td><%= trip.title %></td>
+        <td><%= trip.note %></td>
+        <td><%= trip.start_date %></td>
+        <td><%= trip.end_date %></td>
+        <td><%= link_to "Show this trip", trip, class: "btn btn-primary" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New trip", new_trip_path,class: "btn btn-success" %>
