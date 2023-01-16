@@ -21,11 +21,13 @@
     <!-- Rendering the partial route_fields -->
     <div id="routes">
       <h5> Places </h5> <hr>
-      <%= form.fields_for :routes do |route| %>
-        <%= render "route_fields", :f => route %>
+      <%= turbo_frame_tag "route_fields_forms" do %>
+        <%= form.fields_for :routes do |route| %>
+          <%= render "route_fields", f: route %>
+        <% end %>
       <% end %>
       <div class="links">
-        <%= link_to_add_association "Add Route", form, :routes, :class => "btn btn-primary mt-3 mb-3" %>
+        <%= link_to "Add Route", add_route_field_trips_path, data: { turbo_method: :post }, :class => "btn btn-primary mt-3 mb-3" %>
       </div>
     </div>
 
@@ -33,7 +35,7 @@
     <div id="expenses mt-3">
       <h5> Expenses </h5> <hr>
       <%= form.fields_for :expense_trackers do |route| %>
-        <%= render "expense_tracker_fields", :f => route %>
+        <%= render "expense_tracker_fields", f: route %>
       <% end %>
       <div class="links">
         <%= link_to_add_association "Add Expense", form, :expense_trackers, :class => "btn btn-primary mt-3 mb-3" %>

@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'trips#index'
-  resources :trips
+  resources :trips do
+    collection do
+      post :add_route_field
+    end
+  end
 end
