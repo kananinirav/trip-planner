@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :trips do
     collection do
       post :add_route_field
+      delete :remove_route_field
     end
   end
 end

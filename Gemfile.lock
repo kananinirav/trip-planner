@@ -76,7 +76,6 @@ GEM
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
-    cocoon (1.2.15)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     database_cleaner (2.0.1)
@@ -233,7 +232,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2.2)
-  cocoon
   database_cleaner
   debug
   importmap-rails
