@@ -38,9 +38,6 @@ gem 'bootstrap', '~> 5.2.2'
 # A gem that allows you to use jQuery.
 gem 'jquery-rails'
 
-# A gem that allows you to add nested forms.
-gem 'cocoon'
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

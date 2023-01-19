@@ -14,7 +14,7 @@
         <%= f.date_field :end_date, class: "form-control" %>
       </div>
       <div class="col-md-2">
-        <%= link_to_remove_association "Delete", f, :class => "btn btn-danger  mt-4" %>
+        <%= link_to "Delete", remove_route_field_trips_path(index: f.index, route_id: f.object.id), data: { turbo_method: :delete }, :class => "btn btn-danger  mt-4" %>
       </div>
     </div>
   </div>

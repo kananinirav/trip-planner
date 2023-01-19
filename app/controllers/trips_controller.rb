@@ -71,6 +71,27 @@ class TripsController < ApplicationController
     end
   end
 
+  def remove_route_field
+    route = Route.find_by(id: params[:route_id])
+    trip = route&.trip
+    index = params[:index]
+    if route.present?
+      helpers.fields model: trip do |f|
+        f.fields_for :routes, route, child_index: index do |ff|
+          render turbo_stream: turbo_stream.replace(
+            "route_fields_form_#{index}",
+            partial: "trips/route_field_mark_as_deleted",
+            locals: { f: ff }
+          )
+        end
+      end
+    else
+      render turbo_stream: turbo_stream.remove(
+        "route_fields_form_#{index}"
+      )
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
