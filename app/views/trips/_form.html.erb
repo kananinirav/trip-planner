@@ -33,6 +33,18 @@
 
     <!-- Rendering the partial expense_tracker_fields -->
 
+    <div id="expenses mt-3">
+      <h5> Expenses </h5> <hr>
+      <%= turbo_frame_tag "expense_fields_forms" do %>
+        <%= form.fields_for :expense_trackers do |expense| %>
+          <%= render "expense_tracker_fields", :f => expense, hide_form_flag: false %>
+        <% end %>
+      <% end %>  
+      <div class="links">
+        <%= link_to "Add Expense", add_expense_field_trips_path, data: { turbo_method: :post }, :class => "btn btn-primary mt-3 mb-3" %>
+      </div>
+    </div>
+
     <div class="mt-2">
       <%= form.submit nil , class: "btn btn-success" %>
       <% unless @trip.new_record? %>

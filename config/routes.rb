@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     collection do
       post :add_route_field
       delete :remove_route_field
+      post :add_expense_field
+      delete :remove_expense_field
     end
   end
 end

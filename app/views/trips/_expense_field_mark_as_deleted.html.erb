@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "expense_fields_form_#{f.index}" do %>
+  <%= f.hidden_field :expense_tracker_id, value: f.object.id %>
+  <%= f.hidden_field :_destroy, value: true %>
+<% end %>

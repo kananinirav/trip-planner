@@ -92,6 +92,39 @@ class TripsController < ApplicationController
     end
   end
 
+  def add_expense_field
+    helpers.fields model: Trip.new do |f|
+      f.fields_for :expense_trackers, ExpenseTracker.new, child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff|
+        render turbo_stream: turbo_stream.append(
+          'expense_fields_forms',
+          partial: 'trips/expense_tracker_fields',
+          locals: { f: ff }
+        )
+      end
+    end
+  end
+
+  def remove_expense_field
+    expense_tracker = ExpenseTracker.find_by(id: params[:expense_tracker_id])
+    trip = expense_tracker&.trip
+    index = params[:index]
+    if expense_tracker.present?
+      helpers.fields model: trip do |f|
+        f.fields_for :expense_trackers, expense_tracker, child_index: index do |ff|
+          render turbo_stream: turbo_stream.replace(
+            "expense_fields_form_#{index}",
+            partial: 'trips/expense_field_mark_as_deleted',
+            locals: { f: ff }
+          )
+        end
+      end
+    else
+      render turbo_stream: turbo_stream.remove(
+        "expense_fields_form_#{index}"
+      )
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
