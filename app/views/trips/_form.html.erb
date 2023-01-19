@@ -32,15 +32,6 @@
     </div>
 
     <!-- Rendering the partial expense_tracker_fields -->
-    <div id="expenses mt-3">
-      <h5> Expenses </h5> <hr>
-      <%= form.fields_for :expense_trackers do |route| %>
-        <%= render "expense_tracker_fields", f: route %>
-      <% end %>
-      <div class="links">
-        <%= link_to_add_association "Add Expense", form, :expense_trackers, :class => "btn btn-primary mt-3 mb-3" %>
-      </div>
-    </div>
 
     <div class="mt-2">
       <%= form.submit nil , class: "btn btn-success" %>
