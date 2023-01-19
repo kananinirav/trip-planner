@@ -5,7 +5,6 @@ import "controllers"
 import "jquery"
 import "popper"
 import "bootstrap"
-import "cocoon"
 
 //flash message auto close/hide
 $(document).ready(function() {

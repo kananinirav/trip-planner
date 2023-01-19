@@ -59,6 +59,18 @@ class TripsController < ApplicationController
     end
   end
 
+  def add_route_field
+    helpers.fields model: Trip.new do |f|
+      f.fields_for :routes, Route.new, child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff|
+        render turbo_stream: turbo_stream.append(
+          "route_fields_forms",
+          partial: "trips/route_fields",
+          locals: { f: ff }
+        )
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
